@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src = "https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="firebase.css ">	
+	</head>
+	<body>
+		<div id="layout">
+			<div id="Design">
+				<p id="header">
+					Guest Book
+				</p>
+				<p id="subheader">
+					CSS is fun
+				</p>
+			</div>
+				<br/>
+			<form id="myForm" onsubmit="submitForm()">
+					<div id="Fields"">
+				    		<i>Please enter the following details, full name, organization, and contact number. </i><br/><br/>
+				    		<input type="text" id="name" placeholder="Name"/>
+				    		<input type="text" id="organization" placeholder="Organization"/>
+						<input type="text" id="contactno" placeholder="Contact #"/>
+						<input type="submit" id="send" value="Send"	/>		
+					</div>
+			</form>
+		</div>
+			<script>
+				var myDataRef = new Firebase("https://torrid-inferno-965.firebaseio.com/");	//DATABASEE		
+				function submitForm() {			//<---- ito yung function na magpupush doon sa server
+							//get the values	
+						var name = $("#name").val();
+						var org = $("#organization").val();
+						var contactno = $("#contactno").val();
+						myDataRef.push({name: name, org: org, contactno: contactno});		//PUSH THE DATA
+						$("#name").val("");												//EMPTY THE VALUES
+						$("#organization").val("");
+						$("#contactno").val("");
+					alert("Form was pushed.");		
+				};
+						
+			</script>
+		
+	</body>
+</html>
